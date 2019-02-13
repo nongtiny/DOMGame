@@ -6,13 +6,38 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <link rel="stylesheet" href="css/styles.css">
      <script src="./Game.js"></script>
+     <script src="./levels.js"></script>
      <title>DOMGAME👾</title>
 </head>
 <body>
+     <h1 style="color: aliceblue; text-align: center">Collecting damn coins and Don't touch lava Game</h1>
+     <h2 style="color: aliceblue; text-align: center" id="lives"></h2>
      <script>
-          let simple = new Level(simpleLevelPlan);
-          let display = new DOMDisplay(document.body, simple);
-          display.syncState(State.start(simpleLevel));
+          async function runGame(plans, Display) {
+               let lives = 3;
+               for (let level = 0; level < plans.length && lives > 0;) {
+                    document.getElementById("lives").textContent = `Level ${level + 1}  💓: ${lives}`;
+                    let status = await runLevel(new Level(plans[level]),
+                                             Display);
+                    if (status == "won") level++;
+                    else lives--;
+               }
+               if (lives > 0) {
+                    document.getElementById("lives").textContent = 'YOU WIN';
+                    let butt =  document.getElementById("lives").createElement("button");
+                    butt.setAttribute("onclick", runGame(GAME_LEVELS, DOMDisplay));
+                    butt.textContent = "PLAY AGAIN 🙋";                       
+               } else {
+                    document.getElementById("lives").textContent = 'YOU LOSE   ';
+                    let butt = document.createElement("button");
+                    butt.setAttribute("onclick", "runGame(GAME_LEVELS, DOMDisplay)");
+                    butt.textContent = "🌈 TRY AGAIN";
+                    document.getElementById("lives").appendChild(butt);
+                                                           
+               }
+          }
+          runGame(GAME_LEVELS, DOMDisplay);
      </script>
+    
 </body>
 </html>

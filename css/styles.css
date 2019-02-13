@@ -1,3 +1,11 @@
+body{
+     overflow: hidden;
+     display: block;
+     margin-left: 20%;
+     margin-right: 20%;
+     background: black;
+}
+
 .background { 
      background: rgb(52, 166, 251);
      table-layout: fixed;
@@ -24,6 +32,10 @@
      background: rgb(241, 229, 89); 
 }
 
+.monster{
+     background: rgb(160, 64, 220); 
+}
+
 .player { 
      background: rgb(64, 64, 64); 
 }
@@ -38,7 +50,8 @@
 
 .game {
      overflow: hidden;
-     max-width: 600px;
-     max-height: 450px;
+     max-width: 750px;
+     max-height: 500px;
      position: relative;
 }
+
